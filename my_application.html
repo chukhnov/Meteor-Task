@@ -1,0 +1,60 @@
+<template name="login">
+    <form class="well">
+                <span class="texts">Please Log In, or&nbsp;
+                    <a href="{{pathFor route='register'}}">Sign Up</a>
+                </span>
+        <p><input type='text' class="textArea" name='username' value="admin"/></p>
+        <p><input type='password' class="textArea" name='password' value="admin"/></p>
+        <p>
+            <button type="submit" class="btn btn-primary btn-sm" value="Login">
+                Login
+            </button>
+        </p>
+    </form>
+</template>
+
+<template name="register">
+    <form class="well">
+                <span class="texts">Please Sign Up, or&nbsp;
+                    <a href="{{pathFor route='login'}}">Log In</a>
+                </span>
+        <p><input type='text' class="textArea" name='username'/></p>
+        <p><input type='password' class="textArea" name='password'/></p>
+        <p>
+            <button type="submit" class="btn btn-primary btn-sm" value="Register">
+                Register
+            </button>
+        </p>
+    </form>
+</template>
+
+<template name="dashboard">
+    {{#if isLoggedInUser}}
+        <div class="well">
+            <button class="btn btn-primary btn-sm" id="logout">
+                Logout
+            </button>
+            <h1>Dashboard</h1>
+        </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>
+
+<template name="admin">
+    {{#if isLoggedInAdmin}}
+        <div class="well">
+            <button class="btn btn-primary btn-sm" id="logout">
+                Logout
+            </button>
+            <h1>Admin Panel</h1>
+            <ul>
+                {{#each createCalendar}}
+                    <li>{{status}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{else}}
+        {{> dashboard}}
+    {{/if}}
+</template>
