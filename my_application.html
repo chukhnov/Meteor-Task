@@ -3,8 +3,8 @@
                 <span class="texts">Please Log In, or&nbsp;
                     <a href="{{pathFor route='register'}}">Sign Up</a>
                 </span>
-        <p><input type='text' class="textArea" name='username' value="admin"/></p>
-        <p><input type='password' class="textArea" name='password' value="admin"/></p>
+        <p><input type='text' class="textArea" name='username' value="Mike"/></p>
+        <p><input type='password' class="textArea" name='password' value="1"/></p>
         <p>
             <button type="submit" class="btn btn-primary btn-sm" value="Login">
                 Login
@@ -30,12 +30,30 @@
 
 <template name="dashboard">
     {{#if isLoggedInUser}}
-        <div class="well">
-            <button class="btn btn-primary btn-sm" id="logout">
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="logout">
                 Logout
             </button>
-            <h1>Dashboard</h1>
+            <table class="tableWidth">
+                <tbody>
+                <tr>
+                    {{#each createCalendar}}
+                        <td>
+                            <button id="day" class="{{className}}" value="{{day}}">
+                                <div class="divTable">{{day}}</div>
+                            </button>
+                        </td>
+                    {{/each}}
+                </tr>
+                </tbody>
+            </table>
         </div>
+        <button class="danger btn btn-danger btn-xs" id="previousWeek">
+            Previous week
+        </button>
+        <button class="danger btn btn-success btn-xs" id="nextWeek">
+            Next week
+        </button>
     {{else}}
         {{> login}}
     {{/if}}
@@ -43,16 +61,23 @@
 
 <template name="admin">
     {{#if isLoggedInAdmin}}
-        <div class="well">
-            <button class="btn btn-primary btn-sm" id="logout">
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="logout">
                 Logout
             </button>
-            <h1>Admin Panel</h1>
-            <ul>
-                {{#each createCalendar}}
-                    <li>{{status}}</li>
-                {{/each}}
-            </ul>
+            <table class="tableWidth">
+                <tbody>
+                <tr>
+                    {{#each createCalendar}}
+                        <td>
+                            <button id="day" class="btn btn-default btn-xsm" value="{{this}}">
+                                <div class="divTable">{{this}}</div>
+                            </button>
+                        </td>
+                    {{/each}}
+                </tr>
+                </tbody>
+            </table>
         </div>
     {{else}}
         {{> dashboard}}
