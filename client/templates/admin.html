@@ -1,0 +1,35 @@
+<template name="admin">
+    {{#if isLoggedInAdmin}}
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="logout">
+                Logout
+            </button>
+            <table class="tableWidth">
+                <tbody>
+                <tr>
+                    {{#each createCalendar}}
+                        <td>
+                            <button id="day" class="btn btn-default btn-xsm" value="{{this}}">
+                                <div class="divTable">{{this}}</div>
+                            </button>
+                        </td>
+                    {{/each}}
+                </tr>
+                </tbody>
+            </table>
+            <ul>
+                {{#each adminFindUsers}}
+                    <p>
+                        <button>
+                            Delete current day
+                        </button>
+                        &nbsp;&nbsp;
+                        <span>{{_id}}</span>
+                    </p>
+                {{/each}}
+            </ul>
+        </div>
+    {{else}}
+        {{> dashboard}}
+    {{/if}}
+</template>

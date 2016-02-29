@@ -1,0 +1,30 @@
+<template name="dashboard">
+    {{#if isLoggedInUser}}
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="logout">
+                Logout
+            </button>
+            <table class="tableWidth">
+                <tbody>
+                <tr>
+                    {{#each createCalendar}}
+                        <td>
+                            <button id="day" class="{{className}}" value="{{day}}">
+                                <div class="divTable">{{day}}</div>
+                            </button>
+                        </td>
+                    {{/each}}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="danger btn btn-danger btn-xs" id="previousWeek">
+            Previous week
+        </button>
+        <button class="danger btn btn-success btn-xs" id="nextWeek">
+            Next week
+        </button>
+    {{else}}
+        {{> login}}
+    {{/if}}
+</template>

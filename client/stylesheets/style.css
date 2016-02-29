@@ -1,0 +1,36 @@
+.well {
+    max-width: 400px;
+    margin: 0 auto 10px;
+    text-align: center
+}
+.texts {
+    font-size: 20px
+}
+.textArea {
+    margin-top: 12px;
+    height: 35px;
+    text-align: center
+}
+
+.container {
+    text-align: center;
+}
+
+.divTable {
+    width: 115px;
+    height: 35px;
+    font-size: 25px
+}
+.tableWidth {
+    width: 85%;
+    margin: 5%
+
+}
+#previousWeek {
+    position: absolute;
+    left: 20%
+}
+#nextWeek {
+    position: absolute;
+    left: 70%
+}
