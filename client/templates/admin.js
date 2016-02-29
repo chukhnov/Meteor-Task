@@ -1,3 +1,6 @@
+Meteor.subscribe('members');
+
+
 Template.admin.helpers({
     isLoggedInAdmin: function () {
         return Meteor.user().username == 'admin'
@@ -15,7 +18,6 @@ Template.admin.helpers({
         return calendar
     },
     adminFindUsers: function () {
-        // console.log(Members.find({days: {day: "2/21/2016", status: true}}))
         console.log(Members.find().collection._docs._map)
     }
 

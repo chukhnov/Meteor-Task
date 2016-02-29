@@ -1,44 +1,30 @@
+Meteor.subscribe('members');
+
+
 Template.dashboard.helpers({
     isLoggedInUser: function () {
         return !!Meteor.user();
     },
 
-    createCalendar: function () {
-        var item = Members.findOne(Meteor.userId());
-        delete item.days[0];
-        var calendar = [];
-        var calendarOther = [];
-        var begin, endOfWeek;
-
-        var days = Session.get('startWeek');
-
-        if (days == 0 || days == undefined) {
-            begin = moment().startOf('week');
-            endOfWeek = moment().endOf('week').add(1, 'day');
-        } else{
-            begin = moment().startOf('week').add(days, 'day');
-            endOfWeek = moment().endOf('week').add(days +1, 'day');
-        }
-
-
-        while (!endOfWeek.isSame(begin, 'day')) {
-            calendarOther.push({
-                day: begin.format('l'),
-                status: false,
-                className: "btn btn-default btn-lg"
-
-            });
-            calendar.push(begin.format('l'));
-            begin.add(1, 'day')
-        }
-        Object.keys(calendarOther).map((i) => (
-            Object.keys(item.days).map((key) => (
-                calendarOther[i].day == item.days[key].day ?
-                    calendarOther[i].className = "btn btn-primary btn-lg" : null
-            ))
-        ));
-        return calendarOther
-
+    days() {
+        const
+            startWeek = Session.get('startWeek') || 0,
+            beginOfWeek = moment().startOf('week').add(startWeek, 'day'),
+            endOfWeek = moment().endOf('week').add(startWeek, 'day'),
+            range = moment().range(beginOfWeek, endOfWeek),
+            user = Members.findOne(Meteor.userId());
+        let days = [];
+        range.by('day', function (day) {
+            const
+                currentDay = day.format('l'),
+                found = user.days.find(item => item.day == currentDay);
+            days.push({
+                day: currentDay,
+                status: !!found,
+                className: found ? 'btn btn-primary btn-lg' : "btn btn-default btn-lg"
+            })
+        });
+        return days
     }
 });
 

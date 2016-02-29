@@ -6,7 +6,11 @@ Template.register.events({
 
         Accounts.createUser({
             username: username,
-            password: password
+            password: password,
+            profile: {
+                role: 2
+            },
+            adsfasdf:'dsasdf'
 
         }, function (error) {
             if (error) {
