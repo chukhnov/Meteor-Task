@@ -1,4 +1,5 @@
-Meteor.subscribe('members');
+Meteor.subscribe('directory');
+
 
 
 Template.dashboard.helpers({
@@ -12,12 +13,12 @@ Template.dashboard.helpers({
             beginOfWeek = moment().startOf('week').add(startWeek, 'day'),
             endOfWeek = moment().endOf('week').add(startWeek, 'day'),
             range = moment().range(beginOfWeek, endOfWeek),
-            user = Members.findOne(Meteor.userId());
+            user = Meteor.users.findOne(Meteor.userId());
         let days = [];
         range.by('day', function (day) {
             const
                 currentDay = day.format('l'),
-                found = user.days.find(item => item.day == currentDay);
+                found = user.profile.days.find(item => item.day == currentDay);
             days.push({
                 day: currentDay,
                 status: !!found,

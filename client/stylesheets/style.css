@@ -34,3 +34,11 @@
     position: absolute;
     left: 70%
 }
+.left-users {
+    position: absolute;
+    left: 30%;
+}
+.right-users {
+    position: absolute;
+    left: 60%;
+}

@@ -1,0 +1,53 @@
+<template name="admin">
+    {{#if isLoggedInAdmin}}
+        <div class="container">
+            <button class="btn btn-default btn-lg" id="logout">
+                Logout
+            </button>
+            <table class="tableWidth">
+                <button class="danger btn btn-warning btn-xs" id="previousWeek">
+                    Previous week
+                </button>
+                <button class="danger btn btn-warning btn-xs" id="nextWeek">
+                    Next week
+                </button>
+                <br><br><br>
+                <tbody>
+                <tr>
+                    {{#each days}}
+                        <td>
+                            <button id="day" class="btn btn-default btn-xsm" value="{{this}}">
+                                <div class="divTable">{{this}}</div>
+                            </button>
+                        </td>
+                    {{/each}}
+                </tr>
+                </tbody>
+            </table>
+            <div class="left-users">
+                {{#each usersWhoAdded}}
+                    <p>
+                        <button class="btn btn-danger btn-xs" id="removeCurrentDayFromUser" value="{{_id}}">
+                            Remove current day
+                        </button>
+                        &nbsp;&nbsp;
+                        <span>{{username}}</span>
+                    </p>
+                {{/each}}
+            </div>
+            <div class="right-users">
+                {{#each usersWhoRemoved}}
+                    <p>
+                        <button class="btn btn-success btn-xs" id="addCurrentDayToUser" value="{{_id}}">
+                            Add current day
+                        </button>
+                        &nbsp;&nbsp;
+                        <span>{{username}}</span>
+                    </p>
+                {{/each}}
+            </div>
+        </div>
+    {{else}}
+        {{> dashboard}}
+    {{/if}}
+</template>
